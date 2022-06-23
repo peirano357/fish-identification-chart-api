@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CreateRegionDto } from './dto/create-region.dto';
 import { GetRegionsFilterDto } from './dto/get-regions-filter.dto';
 import { RegionsRepository } from './regions.repository';
@@ -6,6 +10,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Region } from 'src/regions/region.entity';
 import { User } from 'src/auth/user.entity';
 import { GetUser } from 'src/auth/get-user.decorator';
+import { UserTypeEnum } from 'src/auth/enum/user-type.enum';
 
 @Injectable()
 export class RegionsService {
@@ -21,15 +26,21 @@ export class RegionsService {
   async getRegionById(id: string): Promise<Region> {
     const found = await this.regionRepository.findOne({ where: { id } });
     if (!found) {
-      throw new NotFoundException(`Task with ID "${id}" not found`);
+      throw new NotFoundException(`Region with ID "${id}" not found`);
     }
     return found;
   }
 
-  async deleteRegion(id: string): Promise<void> {
-    const result = await this.regionRepository.delete({ id });
-    if (result.affected === 0) {
-      throw new NotFoundException(`Task with ID "${id}" not found`);
+  async deleteRegion(id: string, user: User): Promise<void> {
+    if (user.userType == UserTypeEnum.administrator) {
+      const result = await this.regionRepository.delete({ id });
+      if (result.affected === 0) {
+        throw new NotFoundException(`Region with ID "${id}" not found`);
+      }
+    } else {
+      throw new UnauthorizedException(
+        'Only administrators can perform this task.',
+      );
     }
   }
 
@@ -38,16 +49,30 @@ export class RegionsService {
     name: string,
     description: string,
     imageUrl: string,
+    user: User,
   ): Promise<Region> {
     const region = await this.getRegionById(id);
     region.name = name;
     region.description = description;
     region.imageUrl = imageUrl;
-    await this.regionRepository.save(region);
-    return region;
+
+    if (user.userType == UserTypeEnum.administrator) {
+      await this.regionRepository.save(region);
+      return region;
+    } else {
+      throw new UnauthorizedException(
+        'Only administrators can perform this task.',
+      );
+    }
   }
 
-  createRegion(createRegionDto: CreateRegionDto): Promise<Region> {
-    return this.regionRepository.createRegion(createRegionDto);
+  createRegion(createRegionDto: CreateRegionDto, user: User): Promise<Region> {
+    if (user.userType == UserTypeEnum.administrator) {
+      return this.regionRepository.createRegion(createRegionDto);
+    } else {
+      throw new UnauthorizedException(
+        'Only administrators can perform this task.',
+      );
+    }
   }
 }

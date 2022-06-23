@@ -20,7 +20,7 @@ async function bootstrap() {
       'Purchase critter lists by rgion and start logging your spots',
     )
     .setVersion('1.0')
-    .addTag('critter')
+    //.addTag('FIC API')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('apidocs', app, document);

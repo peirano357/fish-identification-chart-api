@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configValidationSchema } from './config.schema';
+import { CrittersModule } from './critters/critters.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { configValidationSchema } from './config.schema';
     }),
     //TasksModule,
     RegionsModule,
+    CrittersModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

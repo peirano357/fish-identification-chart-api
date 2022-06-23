@@ -37,23 +37,30 @@ export class RegionsController {
   @Post()
   createRegion(
     @Body() createRegionDto: CreateRegionDto,
-    //@GetUser() user: User,
+    @GetUser() user: User,
   ): Promise<Region> {
-    return this.regionService.createRegion(createRegionDto);
+    return this.regionService.createRegion(createRegionDto, user);
   }
 
   @Delete('/:id')
-  deleteRegion(@Param('id') id: string): Promise<void> {
-    return this.regionService.deleteRegion(id);
+  deleteRegion(@Param('id') id: string, @GetUser() user: User): Promise<void> {
+    return this.regionService.deleteRegion(id, user);
   }
 
   @Patch('/:id')
   updateRegion(
     @Param('id') id: string,
     @Body() updateRegionDto: UpdateRegionDto,
+    @GetUser() user: User,
   ): Promise<Region> {
     const { name, description, imageUrl } = updateRegionDto;
-    return this.regionService.updateRegion(id, name, description, imageUrl);
+    return this.regionService.updateRegion(
+      id,
+      name,
+      description,
+      imageUrl,
+      user,
+    );
   }
 
   @Get()
