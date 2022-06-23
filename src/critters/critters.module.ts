@@ -5,7 +5,6 @@ import { AuthModule } from 'src/auth/auth.module';
 import { CrittersController } from './critters.controller';
 import { CrittersRepository } from './critters.repository';
 import { CrittersService } from './critters.service';
-
 @Module({
   imports: [
     ConfigModule,

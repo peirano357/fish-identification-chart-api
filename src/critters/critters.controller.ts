@@ -20,8 +20,15 @@ import { Critter } from './critter.entity';
 import { CrittersService } from './critters.service';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
+import {
+  ApiOperation,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { string } from '@hapi/joi';
+import { CritterRegion } from 'src/critters-region/critter-region.entity';
 
 @Controller('critters')
 @UseGuards(AuthGuard())

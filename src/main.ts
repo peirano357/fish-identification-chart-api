@@ -5,8 +5,6 @@ import { TransformInterceptor } from './transform.interceptor';
 import { Logger } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
-//console.log(process.env.MY_VARIABLE);
-
 async function bootstrap() {
   const logger = new Logger();
   const app = await NestFactory.create(AppModule);

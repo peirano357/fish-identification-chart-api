@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-//import { TasksModule } from './tasks/tasks.module';
 import { RegionsModule } from './regions/regions.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configValidationSchema } from './config.schema';
 import { CrittersModule } from './critters/critters.module';
+import { CrittersRegionsModule } from './critters-region/critters-regions.module';
 
 @Module({
   imports: [
@@ -13,9 +13,9 @@ import { CrittersModule } from './critters/critters.module';
       envFilePath: [`.env.stage.${process.env.STAGE}`],
       validationSchema: configValidationSchema,
     }),
-    //TasksModule,
     RegionsModule,
     CrittersModule,
+    CrittersRegionsModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -32,18 +32,6 @@ import { CrittersModule } from './critters/critters.module';
         };
       },
     }),
-    /*
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'task-management',
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
-    */
     AuthModule,
   ],
 })
