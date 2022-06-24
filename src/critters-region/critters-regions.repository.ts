@@ -1,10 +1,10 @@
 import { User } from 'src/auth/user.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateCritterRegionDto } from './dto/create-critter-region.dto';
-import { GetCrittersRegionsFilterDto } from './dto/get-critters-regions-filter.dto';
 
 import { CritterRegion } from './critter-region.entity';
 import { InternalServerErrorException, Logger } from '@nestjs/common';
+import { Critter } from 'src/critters/critter.entity';
 
 @EntityRepository(CritterRegion)
 export class CrittersRegionsRepository extends Repository<CritterRegion> {
@@ -23,27 +23,27 @@ export class CrittersRegionsRepository extends Repository<CritterRegion> {
     return critterregion;
   }
 
-  async getCrittersInRegion(
-    filterDto: GetCrittersRegionsFilterDto,
-  ): Promise<CritterRegion[]> {
-    const { search } = filterDto;
+  async getCrittersInRegion(regionId: string): Promise<CritterRegion[]> {
     const query = this.createQueryBuilder('critter-region');
 
-    //query.where({ user });
-
-    if (search) {
-      query.andWhere(
-        '(LOWER(region.name) LIKE LOWER(:search) OR LOWER(region.description) LIKE LOWER(:search))',
-        { search: `%${search}%` },
-      );
+    if (regionId) {
+      /*
+      query.andWhere('regionId LIKE (:regionId)', {
+        regionId: `%${regionId}%`,
+      });
+      */
+      query.where({ regionId: regionId });
     }
 
     try {
-      const regions = await query.getMany();
-      return regions;
+      const crittersRegion = await query.getMany();
+
+      return crittersRegion;
     } catch (error) {
       this.logger.error(
-        `Failed to get regions. Filters: ${JSON.stringify(filterDto)} `,
+        `Failed to get critters by region. Filters: ${JSON.stringify(
+          regionId,
+        )} `,
         error.stack,
       );
       throw new InternalServerErrorException();

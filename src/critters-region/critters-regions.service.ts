@@ -4,17 +4,15 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { CreateCritterRegionDto } from './dto/create-critter-region.dto';
-import { GetCrittersRegionsFilterDto } from './dto/get-critters-regions-filter.dto';
 import { CrittersRegionsRepository } from './critters-regions.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CritterRegion } from 'src/critters-region/critter-region.entity';
 import { User } from 'src/auth/user.entity';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { UserTypeEnum } from 'src/auth/enum/user-type.enum';
-import { CrittersService } from 'src/critters/critters.service';
 import { CrittersRepository } from 'src/critters/critters.repository';
-import { RegionsService } from 'src/regions/regions.service';
 import { RegionsRepository } from 'src/regions/regions.repository';
+import { Critter } from 'src/critters/critter.entity';
 
 @Injectable()
 export class CrittersRegionsService {
@@ -29,10 +27,17 @@ export class CrittersRegionsService {
     private crittersRegionRepository: CrittersRegionsRepository,
   ) {}
 
-  getCrittersInRegion(
-    filterDto: GetCrittersRegionsFilterDto,
-  ): Promise<CritterRegion[]> {
-    return this.crittersRegionRepository.getCrittersInRegion(filterDto);
+  async getCrittersInRegion(regionId: string): Promise<Critter[]> {
+    const crittersRegion =
+      await this.crittersRegionRepository.getCrittersInRegion(regionId);
+
+    const ids = [];
+    await Promise.all(
+      crittersRegion.map(async (cr) => {
+        ids.push(cr.critterId);
+      }),
+    );
+    return await this.crittersRepository.getCrittersByIds(ids);
   }
 
   async getCritterRegionByIds(
@@ -59,7 +64,9 @@ export class CrittersRegionsService {
         regionId,
       });
       if (result.affected === 0) {
-        throw new NotFoundException(`Element with ID "${critterId}" not found`);
+        throw new NotFoundException(
+          `Critter with ID "${critterId}" not found in region with ID "${regionId}" `,
+        );
       }
     } else {
       throw new UnauthorizedException(
