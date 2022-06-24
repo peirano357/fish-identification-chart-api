@@ -46,4 +46,23 @@ export class RegionsRepository extends Repository<Region> {
       throw new InternalServerErrorException();
     }
   }
+
+  async getRegionsByIds(ids: string[]): Promise<Region[]> {
+    const query = this.createQueryBuilder('region');
+
+    if (ids) {
+      query.andWhere('id IN (:ids)', { ids: `${ids}` });
+    }
+
+    try {
+      const regions = await query.getMany();
+      return regions;
+    } catch (error) {
+      this.logger.error(
+        `Failed to get regions. Filters: ${JSON.stringify(ids)} `,
+        error.stack,
+      );
+      throw new InternalServerErrorException();
+    }
+  }
 }

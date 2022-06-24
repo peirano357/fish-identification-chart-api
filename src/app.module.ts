@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configValidationSchema } from './config.schema';
 import { CrittersModule } from './critters/critters.module';
 import { CrittersRegionsModule } from './critters-region/critters-regions.module';
+import { PurchasesModule } from './purchases/purchases.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { CrittersRegionsModule } from './critters-region/critters-regions.module
     RegionsModule,
     CrittersModule,
     CrittersRegionsModule,
+    PurchasesModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

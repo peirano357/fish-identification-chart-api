@@ -15,7 +15,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Fish Identification Chart API')
     .setDescription(
-      'Purchase critter lists by rgion and start logging your spots',
+      'Purchase critter lists by region and start logging your spots',
     )
     .setVersion('1.0')
     //.addTag('FIC API')
