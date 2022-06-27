@@ -7,6 +7,7 @@ import { configValidationSchema } from './config.schema';
 import { CrittersModule } from './critters/critters.module';
 import { CrittersRegionsModule } from './critters-region/critters-regions.module';
 import { PurchasesModule } from './purchases/purchases.module';
+import { SpotsModule } from './spots/spots.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { PurchasesModule } from './purchases/purchases.module';
     CrittersModule,
     CrittersRegionsModule,
     PurchasesModule,
+    SpotsModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

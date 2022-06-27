@@ -42,6 +42,10 @@ export class CrittersController {
   ) {}
 
   @Post()
+  @ApiOperation({
+    summary:
+      'Creates a new critter / fish in the database. (Requires administrator credentials)',
+  })
   createCritter(
     @Body() createCritterDto: CreateCritterDto,
     @GetUser() user: User,
@@ -50,11 +54,19 @@ export class CrittersController {
   }
 
   @Delete('/:id')
+  @ApiOperation({
+    summary:
+      'Deletes a critter / fish from the database. (Requires administrator credentials)',
+  })
   deleteCritter(@Param('id') id: string, @GetUser() user: User): Promise<void> {
     return this.critterService.deleteCritter(id, user);
   }
 
   @Patch('/:id')
+  @ApiOperation({
+    summary:
+      'Updates an existent critter / fish. (Requires administrator credentials)',
+  })
   updateCritter(
     @Param('id') id: string,
     @Body() updateCritterDto: UpdateCritterDto,
@@ -93,6 +105,10 @@ export class CrittersController {
   }
 
   @Get('/:id')
+  @ApiOperation({
+    summary:
+      'Retrieves an existent critter / fish from the database by its ID.',
+  })
   getCritterById(
     @Param('id') id: string,
     @GetUser() user: User,

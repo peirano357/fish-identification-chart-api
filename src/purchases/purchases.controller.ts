@@ -38,7 +38,8 @@ export class PurchasesController {
   /** PERFORMS A REGION CHART PURCHASE FOR A GIVEN USER*/
   @Post('/')
   @ApiOperation({
-    summary: 'Performs a region chart purchase for a given user.',
+    summary:
+      'Performs a region chart purchase for a given user. (Requires administrator credentials)',
   })
   @ApiResponse({
     type: Purchase,
@@ -56,7 +57,8 @@ export class PurchasesController {
   /** REMOVES AN EXISTENT REGION CHART FROM A GIVEN USER */
   @Delete('/')
   @ApiOperation({
-    summary: 'Removes a previously purchased region chart, from a given user.',
+    summary:
+      'Removes a previously purchased region chart, from a given user. (Requires administrator credentials)',
   })
   @ApiResponse({ type: Number, isArray: false })
   removeCritter(

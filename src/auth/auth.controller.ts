@@ -23,6 +23,9 @@ export class AuthController {
   }
 
   @Post('/signin')
+  @ApiOperation({
+    summary: 'Logs in a user and creates a valid JWT for further API calls.',
+  })
   signIn(
     @Body() authCredentialsDto: AuthCredentialsDto,
   ): Promise<{ accessToken: string }> {

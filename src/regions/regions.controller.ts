@@ -35,6 +35,10 @@ export class RegionsController {
   ) {}
 
   @Post()
+  @ApiOperation({
+    summary:
+      'Creates a new diving region. (Requires administrator credentials)',
+  })
   createRegion(
     @Body() createRegionDto: CreateRegionDto,
     @GetUser() user: User,
@@ -43,11 +47,19 @@ export class RegionsController {
   }
 
   @Delete('/:id')
+  @ApiOperation({
+    summary:
+      'Deletes an existent diving region from teh database. (Requires administrator credentials)',
+  })
   deleteRegion(@Param('id') id: string, @GetUser() user: User): Promise<void> {
     return this.regionService.deleteRegion(id, user);
   }
 
   @Patch('/:id')
+  @ApiOperation({
+    summary:
+      'Updates an existent diving region. (Requires administrator credentials)',
+  })
   updateRegion(
     @Param('id') id: string,
     @Body() updateRegionDto: UpdateRegionDto,
@@ -83,6 +95,9 @@ export class RegionsController {
   }
 
   @Get('/:id')
+  @ApiOperation({
+    summary: 'Retrieves a single diving region, by its ID (uuid)',
+  })
   getRegionById(@Param('id') id: string): Promise<Region> {
     return this.regionService.getRegionById(id);
   }

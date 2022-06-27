@@ -39,7 +39,8 @@ export class CrittersRegionsController {
   /** ADDS A CRITTER TO A GIVEN REGION */
   @Post('/:id/region')
   @ApiOperation({
-    summary: 'Adds a given critter to a given region chart.',
+    summary:
+      'Adds a given critter to a given region chart. (Requires administrator credentials)',
   })
   @ApiParam({
     name: 'id',
@@ -103,7 +104,8 @@ export class CrittersRegionsController {
   /** REMOVES AN EXISTENT CRITTER FROM A GIVEN REGION */
   @Delete('/:id/region')
   @ApiOperation({
-    summary: 'Removes an existent critter from a given region.',
+    summary:
+      'Removes an existent critter from a given region. (Requires administrator credentials)',
   })
   @ApiParam({
     name: 'id',
