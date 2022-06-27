@@ -4,7 +4,7 @@ import { User } from 'src/auth/user.entity';
 
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('critter')
 export class Critter {
   @ApiProperty()
   @PrimaryGeneratedColumn('uuid')

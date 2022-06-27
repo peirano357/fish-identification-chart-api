@@ -47,7 +47,7 @@ export class SpotsController {
     status: 201,
     description: 'Critter / fish successfully saved as "spotted" for user.',
   })
-  addPurchase(@Body() spot: Spot, @GetUser() user: User): Promise<Spot> {
+  addSpot(@Body() spot: Spot, @GetUser() user: User): Promise<Spot> {
     return this.spotsService.createSpot(spot, user);
   }
 

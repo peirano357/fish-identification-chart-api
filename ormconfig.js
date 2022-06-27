@@ -8,7 +8,12 @@ const typeormConfig = {
   port: 5432,
   synchronize: false,
   logging: false,
-  entities: ['dist/src/auth/*.entity.js', 'dist/src/regions/*.entity.js'],
+  entities: [
+    'dist/src/auth/*.entity.js',
+    'dist/src/regions/*.entity.js',
+    'dist/src/critters/*.entity.js',
+    'dist/src/critters-region/*.entity.js',
+  ],
   migrations: ['dist/migration/*.js'],
   cli: {
     entitiesDir: 'src/regions',

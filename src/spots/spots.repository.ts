@@ -8,11 +8,13 @@ import { InternalServerErrorException, Logger } from '@nestjs/common';
 export class SpotsRepository extends Repository<Spot> {
   private logger = new Logger('SpotsRepository');
   async createSpot(createSpotDto: CreateSpotDto): Promise<Spot> {
-    const { userId, critterId, spottedDate } = createSpotDto;
+    const { userId, critterId, latitude, longitude } = createSpotDto;
     const spot = this.create({
       userId: userId,
       critterId: critterId,
-      spottedDate: spottedDate,
+      spottedDate: new Date(),
+      latitude: latitude,
+      longitude: longitude,
     });
 
     await this.save(spot);

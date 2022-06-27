@@ -115,14 +115,14 @@ export class SpotsService {
 
     // validate user
     const userExists = await this.usersRepository.findOne({
-      where: { id: createSpotDto.userId },
+      where: { id: user.id },
     });
 
     if (!userExists) {
-      throw new NotFoundException(
-        `User with ID "${createSpotDto.userId}" not found`,
-      );
+      throw new NotFoundException(`User with ID "${user.id}" not found`);
     }
+
+    createSpotDto.userId = user.id;
 
     return this.spotsRepository.createSpot(createSpotDto);
   }
