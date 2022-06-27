@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
 import { User } from 'src/auth/user.entity';
+import { Critter } from 'src/critters/critter.entity';
 
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -21,4 +22,7 @@ export class Region {
   @ApiProperty()
   @Column()
   imageUrl: string;
+
+  @ApiProperty()
+  critters?: Critter[];
 }

@@ -37,5 +37,6 @@ export class CritterRegion {
 
   @ManyToOne(() => Region, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'regionId', referencedColumnName: 'id' })
+  @ApiProperty({ type: Region })
   region?: Region;
 }

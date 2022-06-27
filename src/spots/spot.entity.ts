@@ -43,5 +43,6 @@ export class Spot {
 
   @ManyToOne(() => Critter, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'critterId', referencedColumnName: 'id' })
+  @ApiProperty({ type: Critter })
   critter?: Critter;
 }

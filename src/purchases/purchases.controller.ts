@@ -23,6 +23,7 @@ import {
 import { string } from '@hapi/joi';
 import { Purchase } from 'src/purchases/purchase.entity';
 import { PurchasesService } from 'src/purchases/purchases.service';
+import { Region } from 'src/regions/region.entity';
 
 @Controller('purchases')
 @UseGuards(AuthGuard())
@@ -72,19 +73,15 @@ export class PurchasesController {
     );
   }
 
-  /*
-  @Get('/region/:regionId')
+  @Get('/me')
   @ApiOperation({
-    summary: 'Retrieves a list of all available critters for a given region',
+    summary:
+      'Retrieves a list of all purchased region charts for the current user.',
   })
-  getCrittersInRegion(
-    @Param('regionId') regionId: string,
-    @GetUser() user: User,
-  ): Promise<Critter[]> {
+  getPurchasesForUser(@GetUser() user: User): Promise<Region[]> {
     this.logger.verbose(
-      `Retrieving all critters by region. Filters: ${JSON.stringify(regionId)}`,
+      `Retrieving all regions purchased by the current user.`,
     );
-    return this.critterRegionService.getCrittersInRegion(regionId);
+    return this.purchasesService.getPurchasesByUser(user.id);
   }
-  */
 }

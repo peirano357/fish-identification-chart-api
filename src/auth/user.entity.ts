@@ -5,9 +5,11 @@ import { UserTypeEnum } from './enum/user-type.enum';
 
 @Entity()
 export class User {
+  @ApiProperty()
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @ApiProperty()
   @Column({ unique: true })
   username: string;
 
