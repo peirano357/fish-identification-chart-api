@@ -46,25 +46,4 @@ export class CrittersRepository extends Repository<Critter> {
       throw new InternalServerErrorException();
     }
   }
-
-  async getCrittersByIds(ids: string[]): Promise<Critter[]> {
-    const query = this.createQueryBuilder('critter');
-
-    //query.where({ user });
-
-    if (ids) {
-      query.andWhere('id IN (:ids)', { ids: `${ids}` });
-    }
-
-    try {
-      const critters = await query.getMany();
-      return critters;
-    } catch (error) {
-      this.logger.error(
-        `Failed to get critters. Filters: ${JSON.stringify(ids)} `,
-        error.stack,
-      );
-      throw new InternalServerErrorException();
-    }
-  }
 }

@@ -17,6 +17,7 @@ import { Region } from 'src/regions/region.entity';
 import { CrittersRepository } from 'src/critters/critters.repository';
 import { Critter } from 'src/critters/critter.entity';
 import { Spot } from './spot.entity';
+import { In } from 'typeorm';
 
 @Injectable()
 export class SpotsService {
@@ -43,7 +44,11 @@ export class SpotsService {
         ids.push(p.critterId);
       }),
     );
-    return await this.crittersRepository.getCrittersByIds(ids);
+    return await this.crittersRepository.find({
+      where: {
+        id: In(ids),
+      },
+    });
   }
 
   async getSpotByIds(userId: string, critterId: string): Promise<Spot> {

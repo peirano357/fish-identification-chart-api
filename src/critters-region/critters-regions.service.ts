@@ -13,6 +13,7 @@ import { UserTypeEnum } from 'src/auth/enum/user-type.enum';
 import { CrittersRepository } from 'src/critters/critters.repository';
 import { RegionsRepository } from 'src/regions/regions.repository';
 import { Critter } from 'src/critters/critter.entity';
+import { In } from 'typeorm';
 
 @Injectable()
 export class CrittersRegionsService {
@@ -37,7 +38,13 @@ export class CrittersRegionsService {
         ids.push(cr.critterId);
       }),
     );
-    return await this.crittersRepository.getCrittersByIds(ids);
+
+    //return await this.crittersRepository.getCrittersByIds(ids);
+    return await this.crittersRepository.find({
+      where: {
+        id: In(ids),
+      },
+    });
   }
 
   async getCritterRegionByIds(

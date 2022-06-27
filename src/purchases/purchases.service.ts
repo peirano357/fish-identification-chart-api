@@ -13,6 +13,7 @@ import { UserTypeEnum } from 'src/auth/enum/user-type.enum';
 import { UsersRepository } from 'src/auth/users.repository';
 import { RegionsRepository } from 'src/regions/regions.repository';
 import { Region } from 'src/regions/region.entity';
+import { In } from 'typeorm';
 
 @Injectable()
 export class PurchasesService {
@@ -36,7 +37,12 @@ export class PurchasesService {
         ids.push(p.regionId);
       }),
     );
-    return await this.regionsRepository.getRegionsByIds(ids);
+
+    return await this.regionsRepository.find({
+      where: {
+        id: In(ids),
+      },
+    });
   }
 
   async getPurchaseByIds(userId: string, regionId: string): Promise<Purchase> {
