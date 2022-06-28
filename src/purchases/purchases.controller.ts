@@ -9,21 +9,14 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { GetUser } from 'src/auth/get-user.decorator';
-import { User } from 'src/auth/user.entity';
+import { GetUser } from '../auth/get-user.decorator';
+import { User } from '../auth/user.entity';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import {
-  ApiOperation,
-  ApiParam,
-  ApiQuery,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
-import { string } from '@hapi/joi';
-import { Purchase } from 'src/purchases/purchase.entity';
-import { PurchasesService } from 'src/purchases/purchases.service';
-import { Region } from 'src/regions/region.entity';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Purchase } from '../purchases/purchase.entity';
+import { PurchasesService } from '../purchases/purchases.service';
+import { Region } from '../regions/region.entity';
 
 @Controller('purchases')
 @UseGuards(AuthGuard())

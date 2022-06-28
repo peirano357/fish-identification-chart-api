@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { User } from 'src/auth/user.entity';
-import { Critter } from 'src/critters/critter.entity';
+import { User } from '../auth/user.entity';
+import { Critter } from '../critters/critter.entity';
 
 import {
   Column,

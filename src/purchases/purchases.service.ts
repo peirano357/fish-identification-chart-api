@@ -6,13 +6,12 @@ import {
 import { CreatePurchaseDto } from './dto/create-purchase.dto';
 import { PurchasesRepository } from './purchases.repository';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Purchase } from 'src/purchases/purchase.entity';
-import { User } from 'src/auth/user.entity';
-import { GetUser } from 'src/auth/get-user.decorator';
-import { UserTypeEnum } from 'src/auth/enum/user-type.enum';
-import { UsersRepository } from 'src/auth/users.repository';
-import { RegionsRepository } from 'src/regions/regions.repository';
-import { Region } from 'src/regions/region.entity';
+import { Purchase } from '../purchases/purchase.entity';
+import { User } from '../auth/user.entity';
+import { UserTypeEnum } from '../auth/enum/user-type.enum';
+import { UsersRepository } from '../auth/users.repository';
+import { RegionsRepository } from '../regions/regions.repository';
+import { Region } from '../regions/region.entity';
 import { In } from 'typeorm';
 
 @Injectable()

@@ -4,26 +4,18 @@ import {
   Delete,
   Get,
   Param,
-  Patch,
   Post,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { GetUser } from 'src/auth/get-user.decorator';
-import { User } from 'src/auth/user.entity';
+import { GetUser } from '../auth/get-user.decorator';
+import { User } from '../auth/user.entity';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import {
-  ApiOperation,
-  ApiParam,
-  ApiQuery,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
-import { string } from '@hapi/joi';
-import { CritterRegion } from 'src/critters-region/critter-region.entity';
-import { CrittersRegionsService } from 'src/critters-region/critters-regions.service';
-import { Critter } from 'src/critters/critter.entity';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CritterRegion } from '../critters-region/critter-region.entity';
+import { CrittersRegionsService } from '../critters-region/critters-regions.service';
+import { Critter } from '../critters/critter.entity';
 
 @Controller('critters')
 @UseGuards(AuthGuard())

@@ -10,25 +10,16 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { GetUser } from 'src/auth/get-user.decorator';
-import { User } from 'src/auth/user.entity';
+import { GetUser } from '../auth/get-user.decorator';
+import { User } from '../auth/user.entity';
 import { CreateCritterDto } from './dto/create-critter.dto';
 import { GetCritterFilterDto } from './dto/get-critters-filter.dto';
 import { UpdateCritterDto } from './dto/update-critter.dto';
-//import { TaskStatus } from './task-status.enum';
 import { Critter } from './critter.entity';
 import { CrittersService } from './critters.service';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import {
-  ApiOperation,
-  ApiParam,
-  ApiQuery,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
-import { string } from '@hapi/joi';
-import { CritterRegion } from 'src/critters-region/critter-region.entity';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @Controller('critters')
 @UseGuards(AuthGuard())

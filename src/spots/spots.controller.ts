@@ -1,29 +1,13 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { GetUser } from 'src/auth/get-user.decorator';
-import { User } from 'src/auth/user.entity';
+import { GetUser } from '../auth/get-user.decorator';
+import { User } from '../auth/user.entity';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import {
-  ApiOperation,
-  ApiParam,
-  ApiQuery,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
-import { string } from '@hapi/joi';
-import { Spot } from 'src/spots/spot.entity';
-import { SpotsService } from 'src/spots/spots.service';
-import { Critter } from 'src/critters/critter.entity';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Spot } from '../spots/spot.entity';
+import { SpotsService } from '../spots/spots.service';
+import { Critter } from '../critters/critter.entity';
 
 @Controller('spots')
 @UseGuards(AuthGuard())

@@ -1,10 +1,8 @@
-import { User } from 'src/auth/user.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateCritterRegionDto } from './dto/create-critter-region.dto';
 
 import { CritterRegion } from './critter-region.entity';
 import { InternalServerErrorException, Logger } from '@nestjs/common';
-import { Critter } from 'src/critters/critter.entity';
 
 @EntityRepository(CritterRegion)
 export class CrittersRegionsRepository extends Repository<CritterRegion> {

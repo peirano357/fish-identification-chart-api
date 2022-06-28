@@ -1,8 +1,6 @@
-import { User } from 'src/auth/user.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateCritterDto } from './dto/create-critter.dto';
 import { GetCritterFilterDto } from './dto/get-critters-filter.dto';
-
 import { Critter } from './critter.entity';
 import { InternalServerErrorException, Logger } from '@nestjs/common';
 

@@ -7,10 +7,9 @@ import { CreateCritterDto } from './dto/create-critter.dto';
 import { GetCritterFilterDto } from './dto/get-critters-filter.dto';
 import { CrittersRepository } from './critters.repository';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Critter } from 'src/critters/critter.entity';
-import { User } from 'src/auth/user.entity';
-import { GetUser } from 'src/auth/get-user.decorator';
-import { UserTypeEnum } from 'src/auth/enum/user-type.enum';
+import { Critter } from '../critters/critter.entity';
+import { User } from '../auth/user.entity';
+import { UserTypeEnum } from '../auth/enum/user-type.enum';
 
 @Injectable()
 export class CrittersService {

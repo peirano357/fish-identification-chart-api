@@ -7,10 +7,9 @@ import { CreateRegionDto } from './dto/create-region.dto';
 import { GetRegionsFilterDto } from './dto/get-regions-filter.dto';
 import { RegionsRepository } from './regions.repository';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Region } from 'src/regions/region.entity';
-import { User } from 'src/auth/user.entity';
-import { GetUser } from 'src/auth/get-user.decorator';
-import { UserTypeEnum } from 'src/auth/enum/user-type.enum';
+import { Region } from '../regions/region.entity';
+import { User } from '../auth/user.entity';
+import { UserTypeEnum } from '../auth/enum/user-type.enum';
 
 @Injectable()
 export class RegionsService {

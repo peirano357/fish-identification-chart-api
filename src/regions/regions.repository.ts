@@ -1,4 +1,3 @@
-import { User } from 'src/auth/user.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateRegionDto } from './dto/create-region.dto';
 import { GetRegionsFilterDto } from './dto/get-regions-filter.dto';

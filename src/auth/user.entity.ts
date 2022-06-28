@@ -1,6 +1,5 @@
-//import { Task } from 'src/tasks/task.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { UserTypeEnum } from './enum/user-type.enum';
 
 @Entity()

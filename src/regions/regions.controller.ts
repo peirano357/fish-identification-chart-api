@@ -10,8 +10,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { GetUser } from 'src/auth/get-user.decorator';
-import { User } from 'src/auth/user.entity';
+import { GetUser } from '../auth/get-user.decorator';
+import { User } from '../auth/user.entity';
 import { CreateRegionDto } from './dto/create-region.dto';
 import { GetRegionsFilterDto } from './dto/get-regions-filter.dto';
 import { UpdateRegionDto } from './dto/update-region.dto';
@@ -20,8 +20,7 @@ import { Region } from './region.entity';
 import { RegionsService } from './regions.service';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
-import { string } from '@hapi/joi';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @Controller('regions')
 @UseGuards(AuthGuard())

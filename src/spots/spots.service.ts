@@ -1,21 +1,13 @@
-import {
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateSpotDto } from './dto/create-spot.dto';
 import { SpotsRepository } from './spots.repository';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Purchase } from 'src/purchases/purchase.entity';
-import { User } from 'src/auth/user.entity';
-import { GetUser } from 'src/auth/get-user.decorator';
-import { UserTypeEnum } from 'src/auth/enum/user-type.enum';
-import { UsersRepository } from 'src/auth/users.repository';
-import { RegionsRepository } from 'src/regions/regions.repository';
-import { Region } from 'src/regions/region.entity';
+import { User } from '../auth/user.entity';
+import { UsersRepository } from '../auth/users.repository';
+import { RegionsRepository } from '../regions/regions.repository';
 
-import { CrittersRepository } from 'src/critters/critters.repository';
-import { Critter } from 'src/critters/critter.entity';
+import { CrittersRepository } from '../critters/critters.repository';
+import { Critter } from '../critters/critter.entity';
 import { Spot } from './spot.entity';
 import { In } from 'typeorm';
 

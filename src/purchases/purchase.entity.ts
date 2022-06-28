@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { User } from 'src/auth/user.entity';
-import { Region } from 'src/regions/region.entity';
+import { User } from '../auth/user.entity';
+import { Region } from '../regions/region.entity';
 
 import {
   Column,

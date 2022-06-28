@@ -1,9 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Exclude } from 'class-transformer';
-import { User } from 'src/auth/user.entity';
-import { Critter } from 'src/critters/critter.entity';
 
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('region')
 export class Region {
@@ -23,6 +20,9 @@ export class Region {
   @Column()
   imageUrl: string;
 
-  @ApiProperty()
-  critters?: Critter[];
+  constructor(name?: string, description?: string, imageUrl?: string) {
+    this.name = name || '';
+    this.description = description || '';
+    this.imageUrl = imageUrl || '';
+  }
 }

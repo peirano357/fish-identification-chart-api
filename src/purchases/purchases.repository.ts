@@ -1,10 +1,7 @@
-import { User } from 'src/auth/user.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { CreatePurchaseDto } from './dto/create-purchase.dto';
-
 import { Purchase } from './purchase.entity';
 import { InternalServerErrorException, Logger } from '@nestjs/common';
-import { Region } from 'src/regions/region.entity';
 
 @EntityRepository(Purchase)
 export class PurchasesRepository extends Repository<Purchase> {

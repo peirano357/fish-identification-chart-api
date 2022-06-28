@@ -1,8 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Exclude } from 'class-transformer';
-import { User } from 'src/auth/user.entity';
-import { Critter } from 'src/critters/critter.entity';
-import { Region } from 'src/regions/region.entity';
+import { Critter } from '../critters/critter.entity';
+import { Region } from '../regions/region.entity';
 
 import {
   Column,
