@@ -6,7 +6,7 @@ import { InternalServerErrorException, Logger } from '@nestjs/common';
 
 @EntityRepository(Critter)
 export class CrittersRepository extends Repository<Critter> {
-  private logger = new Logger('RegionsRepository');
+  private logger = new Logger('CrittersRepository');
   async createCritter(createCritterDto: CreateCritterDto): Promise<Critter> {
     const { name, description, imageUrl } = createCritterDto;
 

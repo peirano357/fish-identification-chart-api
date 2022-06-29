@@ -65,12 +65,12 @@ export class CrittersService {
     }
   }
 
-  createCritter(
+  async createCritter(
     createCritterDto: CreateCritterDto,
     user: User,
   ): Promise<Critter> {
     if (user.userType == UserTypeEnum.administrator) {
-      return this.critterRepository.createCritter(createCritterDto);
+      return await this.critterRepository.createCritter(createCritterDto);
     } else {
       throw new UnauthorizedException(
         'Only administrators can perform this task.',

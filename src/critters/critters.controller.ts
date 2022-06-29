@@ -19,7 +19,7 @@ import { Critter } from './critter.entity';
 import { CrittersService } from './critters.service';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @Controller('critters')
 @UseGuards(AuthGuard())
@@ -33,6 +33,7 @@ export class CrittersController {
   ) {}
 
   @Post()
+  @ApiBearerAuth('token')
   @ApiOperation({
     summary:
       'Creates a new critter / fish in the database. (Requires administrator credentials)',
@@ -45,6 +46,7 @@ export class CrittersController {
   }
 
   @Delete('/:id')
+  @ApiBearerAuth('token')
   @ApiOperation({
     summary:
       'Deletes a critter / fish from the database. (Requires administrator credentials)',
@@ -54,6 +56,7 @@ export class CrittersController {
   }
 
   @Patch('/:id')
+  @ApiBearerAuth('token')
   @ApiOperation({
     summary:
       'Updates an existent critter / fish. (Requires administrator credentials)',

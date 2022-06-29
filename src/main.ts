@@ -19,6 +19,10 @@ async function bootstrap() {
     )
     .setVersion('1.0')
     //.addTag('FIC API')
+    .addBearerAuth(
+      { in: 'header', type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+      'token',
+    )
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('apidocs', app, document);
