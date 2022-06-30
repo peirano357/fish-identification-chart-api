@@ -8,13 +8,11 @@ import { CrittersRegionsRepository } from './critters-regions.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CritterRegion } from '../critters-region/critter-region.entity';
 import { User } from '../auth/user.entity';
-import { GetUser } from '../auth/get-user.decorator';
 import { UserTypeEnum } from '../auth/enum/user-type.enum';
 import { CrittersRepository } from '../critters/critters.repository';
 import { RegionsRepository } from '../regions/regions.repository';
 import { Critter } from '../critters/critter.entity';
 import { In } from 'typeorm';
-
 @Injectable()
 export class CrittersRegionsService {
   constructor(

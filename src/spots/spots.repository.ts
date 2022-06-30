@@ -1,6 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateSpotDto } from './dto/create-spot.dto';
-
 import { Spot } from './spot.entity';
 import { InternalServerErrorException, Logger } from '@nestjs/common';
 

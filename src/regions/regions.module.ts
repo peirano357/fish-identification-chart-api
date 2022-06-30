@@ -5,7 +5,6 @@ import { AuthModule } from '../auth/auth.module';
 import { RegionsController } from './regions.controller';
 import { RegionsRepository } from './regions.repository';
 import { RegionsService } from './regions.service';
-
 @Module({
   imports: [
     ConfigModule,

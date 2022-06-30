@@ -81,14 +81,6 @@ export class RegionsController {
   @ApiOperation({
     summary: 'Retrieves a list of all available diving regions',
   })
-  /*
-  @ApiQuery({
-    name: 'search',
-    type: string,
-    required: false,
-    description: 'Search string key',
-  })
-  */
   getRegions(@Query() filterDto: GetRegionsFilterDto): Promise<Region[]> {
     this.logger.verbose(
       `Retrieving all regions. Filters: ${JSON.stringify(filterDto)}`,

@@ -1,7 +1,6 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateRegionDto } from './dto/create-region.dto';
 import { GetRegionsFilterDto } from './dto/get-regions-filter.dto';
-
 import { Region } from './region.entity';
 import { InternalServerErrorException, Logger } from '@nestjs/common';
 
@@ -24,8 +23,6 @@ export class RegionsRepository extends Repository<Region> {
   async getRegions(filterDto: GetRegionsFilterDto): Promise<Region[]> {
     const { search } = filterDto;
     const query = this.createQueryBuilder('region');
-
-    //query.where({ user });
 
     if (search) {
       query.andWhere(

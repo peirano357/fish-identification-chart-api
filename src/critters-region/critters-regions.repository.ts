@@ -1,6 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateCritterRegionDto } from './dto/create-critter-region.dto';
-
 import { CritterRegion } from './critter-region.entity';
 import { InternalServerErrorException, Logger } from '@nestjs/common';
 
