@@ -12,7 +12,13 @@ import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/user.entity';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CritterRegion } from '../critters-region/critter-region.entity';
 import { CrittersRegionsService } from '../critters-region/critters-regions.service';
 import { Critter } from '../critters/critter.entity';
@@ -30,6 +36,7 @@ export class CrittersRegionsController {
 
   /** ADDS A CRITTER TO A GIVEN REGION */
   @Post('/:id/region')
+  @ApiBearerAuth('token')
   @ApiOperation({
     summary:
       'Adds a given critter to a given region chart. (Requires administrator credentials)',
@@ -55,46 +62,8 @@ export class CrittersRegionsController {
     return this.critterRegionService.createCritterRegion(critterRegion, user);
   }
 
-  /** MODIFIES EXISTENT CRITTER INSIDE A REGION */
-  /*
-  @Patch("/:id/order-product")
-  @ApiOperation({
-    summary:
-      "Actualiza los atributos de un producto dentro de un pedido enviado por ID de PEDIDO",
-  })
-  @ApiParam({
-    name: "id",
-    type: Number,
-    required: true,
-    description: "El ID de pedido como figura en la base de datos",
-  })
-  @ApiResponse({
-    type: OrderProduct,
-    isArray: false,
-    status: 200,
-    description:
-      "El producto fue actualizado con éxito dentro del pedido actual",
-  })
-  updateProduct(
-    @Req() request: any,
-    @Param("id") id: number,
-    @Body() orderProduct: OrderProduct
-  ): Promise<OrderProduct> {
-    orderProduct.orderId = id;
-    return this.serviceOrderProduct.update(
-      {
-        productCode: orderProduct.productCode,
-        color: orderProduct.color,
-        size: orderProduct.size,
-        orderId: id,
-      },
-      orderProduct
-    );
-  }
-  */
-  /**********/
-  /** REMOVES AN EXISTENT CRITTER FROM A GIVEN REGION */
   @Delete('/:id/region')
+  @ApiBearerAuth('token')
   @ApiOperation({
     summary:
       'Removes an existent critter from a given region. (Requires administrator credentials)',
@@ -119,6 +88,7 @@ export class CrittersRegionsController {
   }
 
   @Get('/region/:regionId')
+  @ApiBearerAuth('token')
   @ApiOperation({
     summary: 'Retrieves a list of all available critters for a given region',
   })

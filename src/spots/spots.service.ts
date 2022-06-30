@@ -1,21 +1,25 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CreateSpotDto } from './dto/create-spot.dto';
 import { SpotsRepository } from './spots.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../auth/user.entity';
 import { UsersRepository } from '../auth/users.repository';
-import { RegionsRepository } from '../regions/regions.repository';
-
 import { CrittersRepository } from '../critters/critters.repository';
 import { Critter } from '../critters/critter.entity';
 import { Spot } from './spot.entity';
 import { In } from 'typeorm';
+import { PurchasesRepository } from 'src/purchases/purchases.repository';
+import { CrittersRegionsRepository } from 'src/critters-region/critters-regions.repository';
 
 @Injectable()
 export class SpotsService {
   constructor(
-    @InjectRepository(RegionsRepository)
-    private regionsRepository: RegionsRepository,
+    @InjectRepository(CrittersRegionsRepository)
+    private crittersRegionsRepository: CrittersRegionsRepository,
 
     @InjectRepository(CrittersRepository)
     private crittersRepository: CrittersRepository,
@@ -25,6 +29,9 @@ export class SpotsService {
 
     @InjectRepository(SpotsRepository)
     private spotsRepository: SpotsRepository,
+
+    @InjectRepository(PurchasesRepository)
+    private purchasesRepository: PurchasesRepository,
   ) {}
 
   async getSpotsByUser(userId: string): Promise<Critter[]> {
@@ -119,8 +126,33 @@ export class SpotsService {
       throw new NotFoundException(`User with ID "${user.id}" not found`);
     }
 
-    createSpotDto.userId = user.id;
+    // validate if user has purchased a region, where the critter is available
+    const purchases = await this.purchasesRepository.getPurchasesByUser(
+      user.id,
+    );
 
+    const ids = [];
+    await Promise.all(
+      purchases.map(async (p) => {
+        ids.push(p.regionId);
+      }),
+    );
+
+    const founds = await this.crittersRegionsRepository.find({
+      where: {
+        regionId: In(ids),
+        critterId: createSpotDto.critterId,
+      },
+    });
+
+    if (founds.length < 1) {
+      throw new UnauthorizedException(
+        'The current user has not this critter in his/her purchased regions.',
+      );
+    }
+
+    // create spot
+    createSpotDto.userId = user.id;
     return this.spotsRepository.createSpot(createSpotDto);
   }
 }

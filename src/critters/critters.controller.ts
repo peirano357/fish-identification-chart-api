@@ -77,6 +77,7 @@ export class CrittersController {
   }
 
   @Get()
+  @ApiBearerAuth('token')
   @ApiOperation({
     summary: 'Retrieves a list of all available critters',
   })
@@ -99,6 +100,7 @@ export class CrittersController {
   }
 
   @Get('/:id')
+  @ApiBearerAuth('token')
   @ApiOperation({
     summary:
       'Retrieves an existent critter / fish from the database by its ID.',

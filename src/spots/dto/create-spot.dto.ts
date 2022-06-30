@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsUUID } from 'class-validator';
 
 export class CreateSpotDto {
   @IsNotEmpty()
@@ -12,6 +12,7 @@ export class CreateSpotDto {
 
   @IsNotEmpty()
   @ApiProperty()
+  @IsUUID('all', { each: true })
   critterId: string;
 
   @IsNotEmpty()
@@ -21,4 +22,7 @@ export class CreateSpotDto {
   @IsNotEmpty()
   @ApiProperty()
   longitude: number;
+}
+function UUIDVersion(UUIDVersion: any, arg1: { each: true }) {
+  throw new Error('Function not implemented.');
 }

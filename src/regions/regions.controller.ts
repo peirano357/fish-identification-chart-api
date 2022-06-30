@@ -15,12 +15,11 @@ import { User } from '../auth/user.entity';
 import { CreateRegionDto } from './dto/create-region.dto';
 import { GetRegionsFilterDto } from './dto/get-regions-filter.dto';
 import { UpdateRegionDto } from './dto/update-region.dto';
-//import { TaskStatus } from './task-status.enum';
 import { Region } from './region.entity';
 import { RegionsService } from './regions.service';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @Controller('regions')
 @UseGuards(AuthGuard())
@@ -34,6 +33,7 @@ export class RegionsController {
   ) {}
 
   @Post()
+  @ApiBearerAuth('token')
   @ApiOperation({
     summary:
       'Creates a new diving region. (Requires administrator credentials)',
@@ -46,6 +46,7 @@ export class RegionsController {
   }
 
   @Delete('/:id')
+  @ApiBearerAuth('token')
   @ApiOperation({
     summary:
       'Deletes an existent diving region from teh database. (Requires administrator credentials)',
@@ -55,6 +56,7 @@ export class RegionsController {
   }
 
   @Patch('/:id')
+  @ApiBearerAuth('token')
   @ApiOperation({
     summary:
       'Updates an existent diving region. (Requires administrator credentials)',
@@ -75,6 +77,7 @@ export class RegionsController {
   }
 
   @Get()
+  @ApiBearerAuth('token')
   @ApiOperation({
     summary: 'Retrieves a list of all available diving regions',
   })
@@ -94,6 +97,7 @@ export class RegionsController {
   }
 
   @Get('/:id')
+  @ApiBearerAuth('token')
   @ApiOperation({
     summary: 'Retrieves a single diving region, by its ID (uuid)',
   })

@@ -47,6 +47,24 @@ export class CrittersRegionsService {
     });
   }
 
+  /** CHECKS IF A GIVEN CRITTER IS AVAILABLE IN ANY OF THE GIVEN REGIONS  **/
+  async isCritterInRegions(
+    critterId: string,
+    regionId: string[],
+  ): Promise<boolean> {
+    const founds = await this.crittersRegionRepository.find({
+      where: {
+        regionId: In(regionId),
+        critterId: critterId,
+      },
+    });
+
+    if (founds.length > 0) {
+      return true;
+    }
+    return false;
+  }
+
   async getCritterRegionByIds(
     critterId: string,
     regionId: string,

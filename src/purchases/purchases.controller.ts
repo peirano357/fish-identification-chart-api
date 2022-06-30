@@ -13,7 +13,12 @@ import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/user.entity';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Purchase } from '../purchases/purchase.entity';
 import { PurchasesService } from '../purchases/purchases.service';
 import { Region } from '../regions/region.entity';
@@ -31,6 +36,7 @@ export class PurchasesController {
 
   /** PERFORMS A REGION CHART PURCHASE FOR A GIVEN USER*/
   @Post('/')
+  @ApiBearerAuth('token')
   @ApiOperation({
     summary:
       'Performs a region chart purchase for a given user. (Requires administrator credentials)',
@@ -50,6 +56,7 @@ export class PurchasesController {
 
   /** REMOVES AN EXISTENT REGION CHART FROM A GIVEN USER */
   @Delete('/')
+  @ApiBearerAuth('token')
   @ApiOperation({
     summary:
       'Removes a previously purchased region chart, from a given user. (Requires administrator credentials)',
@@ -67,6 +74,7 @@ export class PurchasesController {
   }
 
   @Get('/me')
+  @ApiBearerAuth('token')
   @ApiOperation({
     summary:
       'Retrieves a list of all purchased region charts for the current user.',
