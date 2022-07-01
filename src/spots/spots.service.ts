@@ -12,8 +12,8 @@ import { CrittersRepository } from '../critters/critters.repository';
 import { Critter } from '../critters/critter.entity';
 import { Spot } from './spot.entity';
 import { In } from 'typeorm';
-import { PurchasesRepository } from 'src/purchases/purchases.repository';
-import { CrittersRegionsRepository } from 'src/critters-region/critters-regions.repository';
+import { PurchasesRepository } from '../purchases/purchases.repository';
+import { CrittersRegionsRepository } from '../critters-region/critters-regions.repository';
 
 @Injectable()
 export class SpotsService {
