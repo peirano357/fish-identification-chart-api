@@ -9,7 +9,7 @@ import * as bcrypt from 'bcrypt';
 
 @EntityRepository(User)
 export class UsersRepository extends Repository<User> {
-  async createUser(authCredentialsDto: AuthCredentialsDto): Promise<void> {
+  async createUser(authCredentialsDto: AuthCredentialsDto): Promise<User> {
     const { username, password, userType } = authCredentialsDto;
 
     const salt = await bcrypt.genSalt();
@@ -23,6 +23,7 @@ export class UsersRepository extends Repository<User> {
 
     try {
       await this.save(user);
+      return user;
     } catch (error) {
       if (error.code === '23505') {
         // duplicate username
