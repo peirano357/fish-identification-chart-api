@@ -1,11 +1,14 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+require('dotenv').config({ path: `${__dirname}/.env.stage.dev` });
+
 const typeormConfig = {
   name: 'default',
   type: 'postgres',
-  username: 'postgres',
-  password: 'docker',
-  database: 'fic',
-  host: 'localhost',
-  port: 5432,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
   synchronize: false,
   logging: false,
   entities: [
