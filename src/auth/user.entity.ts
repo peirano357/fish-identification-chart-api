@@ -26,9 +26,4 @@ export class User {
     nullable: true,
   })
   userType?: UserTypeEnum;
-
-  /*
-  @OneToMany((_type) => Task, (task) => task.user, { eager: true })
-  tasks: Task[];
-  */
 }

@@ -138,10 +138,6 @@ describe('CrittersService', () => {
         '8ec2b7a1-7b83-47fb-a694-fe99ec40c2f7',
         mockAdminUser,
       );
-      console.log('menem');
-      console.log(result);
-
-      //expect(result).toEqual(1);
     });
   });
 });
